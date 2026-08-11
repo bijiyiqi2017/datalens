@@ -46,3 +46,20 @@ def plot_by_category(
     fig.savefig(output_path)
     plt.close(fig)
     return output_path
+
+
+def plot_revenue_over_time(
+    df: pd.DataFrame,
+    output_path: str,
+) -> str:
+    """Save a line chart over time.
+
+    Args:
+        df: Input dataframe.
+        output_path: Path (including filename) to write the PNG to.
+
+    Returns:
+        The ``output_path`` that was written, for convenience.
+    """
+    pass
+    
