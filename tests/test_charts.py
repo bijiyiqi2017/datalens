@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import pytest
 
-from datalens.charts import plot_by_category, plot_revenue_over_time
+from datalens.charts import plot_by_category, plot_revenue_over_time, plot_top_items
 
 
 @pytest.fixture
@@ -22,6 +22,15 @@ def sample_revenue_df():
         {
             "date": ["2023-01-01", "2023-01-02", "2023-01-03"],
             "revenue": [100.0, 150.0, 200.0],
+        }
+    )
+    
+@pytest.fixture
+def sample_items_df():
+    return pd.DataFrame(
+        {
+            "item": ["latte", "coffee", "tea", "latte"],
+            "revenue": [20.0, 15.0, 10.0, 25.0],
         }
     )
 
@@ -45,3 +54,17 @@ def test_plot_revenue_over_time_writes_png_file(tmp_path, sample_revenue_df):
     assert result_path == str(output_path)
     assert os.path.isfile(output_path)
     assert os.path.getsize(output_path) > 0
+
+def test_plot_top_items_writes_png_file(tmp_path, sample_items_df):
+    output_path = tmp_path / "top_items.png"
+
+    result_path = plot_top_items(
+        sample_items_df,
+        output_path=str(output_path),
+        n=3,
+    )
+
+    assert result_path == str(output_path)
+    assert os.path.isfile(output_path)
+    assert os.path.getsize(output_path) > 0
+    
