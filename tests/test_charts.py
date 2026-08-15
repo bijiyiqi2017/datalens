@@ -24,7 +24,7 @@ def sample_revenue_df():
             "revenue": [100.0, 150.0, 200.0],
         }
     )
-    
+
 @pytest.fixture
 def sample_items_df():
     return pd.DataFrame(
@@ -67,4 +67,4 @@ def test_plot_top_items_writes_png_file(tmp_path, sample_items_df):
     assert result_path == str(output_path)
     assert os.path.isfile(output_path)
     assert os.path.getsize(output_path) > 0
-    
+
