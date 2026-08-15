@@ -22,9 +22,9 @@ from datalens.analysis import (
     validate_columns,
 )
 from datalens.charts import plot_by_category, plot_revenue_over_time, plot_top_items
-from datalens.analysis import group_by_summary, summarize, rolling_average
 from datalens.cleaning import clean_data
 from datalens.quality import find_data_quality_issues
+
 
 def _load_csv(path: str) -> pd.DataFrame:
     if not os.path.isfile(path):
@@ -84,6 +84,7 @@ def summarize_cmd(input_csv: str, by: str | None, output: str | None, format: st
         _save_summary(summary, breakdown, output, format)
         click.echo(f"Report saved to {output}")
 
+
 def _save_summary(summary: dict, breakdown: pd.DataFrame | None, output_path: str, file_format: str) -> None:
     if file_format == "csv":
         if breakdown is not None:
@@ -100,6 +101,7 @@ def _save_summary(summary: dict, breakdown: pd.DataFrame | None, output_path: st
                 json.dump(data_to_write, f, indent=2)
         except (KeyError, TypeError) as exc:
             raise click.ClickException(str(exc)) from exc
+
 
 @cli.command()
 @click.argument("input_csv", type=str)
